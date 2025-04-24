@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "stata",
+      "camelcase": "Stata",
+      "title": "Stata",
+      "scope": "source.stata",
+      "file-types": [
+        "do",
+        "ado"
+      ],
+      "injection-regex": "^stata$",
+      "class-name": "TreeSitterStata"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Stata grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Nicolas de Camino",
+        "email": "ndecamino@uc.cl"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/ndecamino/tree-sitter-stata"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
