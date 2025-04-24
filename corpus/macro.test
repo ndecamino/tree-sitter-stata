@@ -1,0 +1,7 @@
+Test macros
+
+Macro definition and usage:
+$macro_name = some_expression
+
+Usage in command:
+regress var1 var2 if $macro_name > 10

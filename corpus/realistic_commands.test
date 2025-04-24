@@ -1,0 +1,69 @@
+==================
+Regression commands
+==================
+
+regress y x1 x2 if x1 > 0, robust
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier) (identifier) (identifier))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (identifier)))
+            (operator >)
+            (right (expression (number))))))
+      (options_qualifier
+        (options (option (identifier)))))))
+
+==================
+Data manipulation
+==================
+
+generate newvar = x1 + x2 if x3 != 0
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (expression 
+        (binary_expression
+          (left (expression (identifier)))
+          (operator +)
+          (right (expression (identifier)))))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (identifier)))
+            (operator !=)
+            (right (expression (number)))))))))
+
+==================
+Complex by command
+==================
+
+by group1 group2: summarize var1 var2 var3 if var1 > 0 & var2 < 10, detail
+
+---
+
+(source_file
+  (command
+    (varlist (identifier) (identifier))
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier) (identifier) (identifier))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (identifier)))
+            (operator >)
+            (right (expression (number))))))
+      (options_qualifier
+        (options (option (identifier)))))))

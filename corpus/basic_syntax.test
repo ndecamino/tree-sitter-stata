@@ -1,0 +1,197 @@
+==================
+Basic command syntax
+==================
+
+command varlist
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier)))))
+
+==================
+Command with options
+==================
+
+command varlist, option1 option2(10)
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (options_qualifier
+        (options
+          (option (identifier))
+          (option (identifier) (expression (number))))))))
+
+==================
+Command with by prefix
+==================
+
+by var1 var2: command varlist
+
+---
+
+(source_file
+  (command
+    (varlist (identifier) (identifier))
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier)))))
+
+==================
+Command with if condition
+==================
+
+command varlist if x > 10
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (identifier)))
+            (operator >)
+            (right (expression (number)))))))))
+
+==================
+Command with in range
+==================
+
+command varlist in 1-100
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (in_qualifier (range)))))
+
+==================
+Command with equals expression
+==================
+
+command varlist = 5 + 3
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (expression
+        (binary_expression
+          (left (expression (number)))
+          (operator +)
+          (right (expression (number))))))))
+
+==================
+Command with multiple qualifiers
+==================
+
+command varlist if x > 10 in 1-100, option1 option2(20)
+
+---
+
+(source_file
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (identifier)))
+            (operator >)
+            (right (expression (number))))))
+      (in_qualifier (range))
+      (options_qualifier
+        (options
+          (option (identifier))
+          (option (identifier) (expression (number))))))))
+
+==================
+Complete example with all elements
+==================
+
+by var1 var2: command var3 var4 = 4.5 if var1 > 10 in 1-100 weight , option1, option2(10)
+
+---
+
+(source_file
+  (command
+    (varlist (identifier) (identifier))
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier) (identifier))
+      (expression (number))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (identifier)))
+            (operator >)
+            (right (expression (number))))))
+      (in_qualifier (range))
+      (weight_qualifier (expression (identifier)))
+      (options_qualifier
+        (options
+          (option (identifier))
+          (option (identifier) (expression (number))))))))
+
+==================
+Macro definition and usage
+==================
+
+$macro_value = 10
+command var1 if $macro_value > 5
+
+---
+
+(source_file
+  (macro_definition
+    (identifier)
+    (expression (number)))
+  (command
+    (_command_with_args
+      (stata_command (identifier))
+      (varlist (identifier))
+      (if_qualifier
+        (expression
+          (binary_expression
+            (left (expression (macro_reference (identifier))))
+            (operator >)
+            (right (expression (number)))))))))
+
+==================
+For loop structure
+==================
+
+forvalues i = 1/10 {
+  command var1
+}
+
+---
+
+(source_file
+  (control_flow_structure
+    (for_structure
+      (identifier)
+      (range)
+      (command
+        (_command_with_args
+          (stata_command (identifier))
+          (varlist (identifier)))))))
