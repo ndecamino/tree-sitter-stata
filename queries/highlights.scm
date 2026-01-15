@@ -7,5 +7,5 @@
 ; Numbers
 (number) @number
 
-; Identifiers
-(identifier) @variable
+; Command names (first identifier)
+(command (identifier) @function)

@@ -17,15 +17,15 @@ module.exports = grammar({
 
     comment: ($) => token(seq("//", /[^\n]*/)),
 
-    command: ($) => seq($.identifier, optional($.argument_list)),
-
-    argument_list: ($) => repeat1($._expression),
+    command: ($) => prec.right(seq(
+      $.identifier,
+      repeat($._expression)
+    )),
 
     _expression: ($) =>
       choice(
         $.string,
-        $.number,
-        $.identifier
+        $.number
       ),
 
     string: ($) => /"[^"]*"/,
