@@ -1,0 +1,34 @@
+{
+  "name": "tree-sitter-stata",
+  "version": "0.1.0",
+  "description": "Stata grammar for tree-sitter",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "stata",
+    "parser"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.8"
+  },
+  "scripts": {
+    "build": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.stata",
+      "file-types": [
+        "do",
+        "ado",
+        "mata",
+        "doh"
+      ],
+      "highlights": "queries/highlights.scm"
+    }
+  ]
+}
