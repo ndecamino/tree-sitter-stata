@@ -1,0 +1,11 @@
+{
+  "grammars": [
+    {
+      "name": "stata",
+      "scope": "source.stata",
+      "path": ".",
+      "file-types": ["do", "ado", "mata", "doh"],
+      "highlights": "queries/highlights.scm"
+    }
+  ]
+}
